@@ -1,4 +1,4 @@
-DESCRIPTION = "Compile Elastic Stack Beats."
+DESCRIPTION = "Compile naive mage"
 HOMEPAGE = "https://github.com/elastic/beats/tree/master/libbeat"
 
 inherit native go

@@ -1,4 +1,4 @@
-DESCRIPTION = "Compile Elastic Stack Beats."
+DESCRIPTION = "Compile Elastic filebeat."
 
 require elastic-beats.inc
 

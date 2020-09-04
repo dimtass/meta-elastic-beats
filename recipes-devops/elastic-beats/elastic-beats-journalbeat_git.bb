@@ -1,4 +1,4 @@
-DESCRIPTION = "Compile Elastic Stack Beats."
+DESCRIPTION = "Compile Elastic journalbeat."
 
 require elastic-beats.inc
 DEPENDS = "systemd"

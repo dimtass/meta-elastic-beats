@@ -54,6 +54,10 @@ For example:
 IMAGE_INSTALL += "elastic-beats-journalbeat elastic-beats-metricbeat"
 ```
 
+The configuration yaml files are the default ones. You need to override them
+with a custom recipe and use your own for your specific usage. The configuration
+Yaml files are located in `meta-elastic-beats/recipes-devops/elastic-beats/elastic-beats`.
+
 ## Known issues
 The golang build changes the files in pkg/mod in to read only. This means that
 bitbake is not able to delete those files if the build fails and you need to

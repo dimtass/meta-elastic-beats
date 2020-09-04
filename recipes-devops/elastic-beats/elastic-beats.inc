@@ -1,5 +1,6 @@
 DESCRIPTION = "Compile Elastic Stack Beats."
 HOMEPAGE = "https://github.com/elastic/beats"
+AUTHOR = "Dimitris Tassopoulos <dimtass@gmail.com>"
 
 inherit go go-mod
 
