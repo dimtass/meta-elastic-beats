@@ -9,35 +9,31 @@ GO_IMPORT = "github.com/elastic/beats"
 GO_INSTALL = "${GO_IMPORT}/${GO_PACKAGE}"
 BEAT_FOLDER = "${S}/src/${GO_INSTALL}"
 
+
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
 
-SRCREV = "${AUTOREV}"
+PV = "7.9.0"
+# SRCREV = "${AUTOREV}"
 
 FILESEXTRAPATHS_append = "${THISDIR}/elastic-beats:"
 
 SRC_URI = " \
-        git://${GO_IMPORT}.git \
+        git://${GO_IMPORT}.git;protocol=https;tag=${PV} \
         file://${GO_PACKAGE}.yml \
         "
 
 RDEPENDS_${PN}-dev += "bash"
 
 do_compile() {
-    set -x
     cd ${GO_PACKAGE}
-    #GOOS=linux GOARCH=arm go build
     go build
+    # This is needed to remove read-only files
     go clean -modcache
     rm -rf src/${GO_IMPORT}/pkg/mod
 }
 
 do_install() {
-    set -x
-    echo "Workdir: ${WORKDIR}"
-    echo "S: ${S}"
-    echo "B: ${B}"
-
     create_exec_script
 
 	install -d ${D}${bindir}/

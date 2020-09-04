@@ -19,7 +19,9 @@ The supported beats currently are:
 * [packetbeat](https://www.elastic.co/beats/packetbeat)
 
 ## Supported versions
-The supported versions are:
+The master repo recipes point always to the latest master `SRCREV = "${AUTOREV}"`,
+but there are tags in the repo for specific and tested versions.
+The supported versions (and repo tags) are:
 
 * v7.9.0
 
@@ -51,6 +53,12 @@ For example:
 ```sh
 IMAGE_INSTALL += "elastic-beats-journalbeat elastic-beats-metricbeat"
 ```
+
+## Known issues
+The golang build changes the files in pkg/mod in to read only. This means that
+bitbake is not able to delete those files if the build fails and you need to
+delete the folder manually. Normally this is handled in `meta-elastic-beats/recipes-devops/elastic-beats/elastic-beats.inc`
+with the `go clean -modcache` comamnd. 
 
 ## Maintainer
 Dimitris Tassopoulos <dimtass@gmail.com>
