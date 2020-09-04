@@ -13,13 +13,13 @@ BEAT_FOLDER = "${S}/src/${GO_INSTALL}"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
 
-PV = "7.9.0"
-# SRCREV = "${AUTOREV}"
+# PV = "7.9.1"
+SRCREV = "${AUTOREV}"
 
 FILESEXTRAPATHS_append = "${THISDIR}/elastic-beats:"
 
 SRC_URI = " \
-        git://${GO_IMPORT}.git;protocol=https;tag=${PV} \
+        git://${GO_IMPORT}.git \
         file://${GO_PACKAGE}.yml \
         "
 
