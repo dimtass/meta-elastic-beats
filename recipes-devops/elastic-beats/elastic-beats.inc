@@ -34,6 +34,7 @@ do_compile() {
     # This is needed to remove read-only files
     go clean -modcache
     rm -rf src/${GO_IMPORT}/pkg/mod
+    find ${B}/pkg -type d -exec chmod 775 {} \;
 }
 
 do_install() {
