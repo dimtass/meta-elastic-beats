@@ -10,6 +10,7 @@ GO_IMPORT = "github.com/elastic/beats"
 GO_INSTALL = "${GO_IMPORT}/${GO_PACKAGE}"
 BEAT_FOLDER = "${S}/src/${GO_INSTALL}"
 
+CGO_CFLAGS += "-I${STAGING_INCDIR}"
 
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
