@@ -1,7 +1,7 @@
 DESCRIPTION = "Compile naive mage"
 HOMEPAGE = "https://github.com/elastic/beats/tree/master/libbeat"
 
-inherit native go
+inherit go native
 
 GO_IMPORT = "github.com/magefile/mage"
 

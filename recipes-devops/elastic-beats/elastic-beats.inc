@@ -10,21 +10,23 @@ GO_IMPORT = "github.com/elastic/beats"
 GO_INSTALL = "${GO_IMPORT}/${GO_PACKAGE}"
 BEAT_FOLDER = "${S}/src/${GO_INSTALL}"
 
+CGO_CFLAGS += "--sysroot=${STAGING_DIR_TARGET} -I${STAGING_INCDIR}"
+CGO_LDFLAGS += "--sysroot=${STAGING_DIR_TARGET} -L${STAGING_LIBDIR}"
 
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
 
-# PV = "7.9.1"
+# PV = "7.13.2"
 SRCREV = "${AUTOREV}"
 
-FILESEXTRAPATHS_append = "${THISDIR}/elastic-beats:"
+FILESEXTRAPATHS:append = "${THISDIR}/elastic-beats:"
 
 SRC_URI = " \
         git://${GO_IMPORT}.git \
         file://${GO_PACKAGE}.yml \
         "
 
-RDEPENDS_${PN}-dev += "bash"
+RDEPENDS:${PN}-dev += "bash"
 
 do_compile() {
     cd ${GO_PACKAGE}
@@ -32,6 +34,7 @@ do_compile() {
     # This is needed to remove read-only files
     go clean -modcache
     rm -rf src/${GO_IMPORT}/pkg/mod
+    find ${B}/pkg -type d -exec chmod 775 {} \;
 }
 
 do_install() {
@@ -72,7 +75,7 @@ EOF
     chmod +x ${WORKDIR}/${GO_PACKAGE}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
         ${datadir} \
         ${sysconfdir} \
 "
