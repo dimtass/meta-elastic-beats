@@ -12,7 +12,7 @@ SRCREV = "${AUTOREV}"
 
 GO_INSTALL = "${GO_IMPORT}"
 
-SRC_URI = "git://${GO_IMPORT}.git"
+SRC_URI = "git://${GO_IMPORT}.git;protocol=https"
 
 DEPENDS += "\
 "
