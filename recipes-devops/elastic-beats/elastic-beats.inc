@@ -64,12 +64,12 @@ create_exec_script() {
 # Script to run ${GO_PACKAGE} in foreground with the same path settings that
 # the init script / systemd unit file would do.
 
-exec ${datadir}/${GO_PACKAGE}/${GO_PACKAGE} \
-  --path.home ${datadir}/${GO_PACKAGE} \
-  --path.config ${sysconfdir}/${GO_PACKAGE} \
-  --path.data ${localstatedir}/lib/${GO_PACKAGE} \
-  --path.logs ${localstatedir}/log/${GO_PACKAGE} \
-  "$@"
+exec ${datadir}/${GO_PACKAGE}/${GO_PACKAGE} \\
+  --path.home ${datadir}/${GO_PACKAGE} \\
+  --path.config ${sysconfdir}/${GO_PACKAGE} \\
+  --path.data ${localstatedir}/lib/${GO_PACKAGE} \\
+  --path.logs ${localstatedir}/log/${GO_PACKAGE} \\
+  "\$@"
 
 EOF
     chmod +x ${WORKDIR}/${GO_PACKAGE}
