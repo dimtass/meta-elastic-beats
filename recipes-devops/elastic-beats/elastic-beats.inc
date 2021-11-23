@@ -22,7 +22,7 @@ SRCREV = "${AUTOREV}"
 FILESEXTRAPATHS:append = "${THISDIR}/elastic-beats:"
 
 SRC_URI = " \
-        git://${GO_IMPORT}.git \
+        git://${GO_IMPORT}.git;protocol=https;branch=7.13 \
         file://${GO_PACKAGE}.yml \
         "
 
