@@ -26,7 +26,7 @@ SRC_URI = " \
         file://${GO_PACKAGE}.yml \
         "
 
-RDEPENDS:${PN}-dev += "bash"
+RDEPENDS:${PN} += "bash"
 
 do_compile() {
     cd ${GO_PACKAGE}
@@ -40,11 +40,11 @@ do_compile() {
 do_install() {
     create_exec_script
 
-	install -d ${D}${bindir}/
-	install -m 0755 ${WORKDIR}/${GO_PACKAGE} ${D}${bindir}
+    install -d ${D}${bindir}/
+    install -m 0755 ${WORKDIR}/${GO_PACKAGE} ${D}${bindir}
 
     install -d ${D}${datadir}/${GO_PACKAGE}
-	install -m 0755 ${BEAT_FOLDER}/${GO_PACKAGE} ${D}${datadir}/${GO_PACKAGE}
+    install -m 0755 ${BEAT_FOLDER}/${GO_PACKAGE} ${D}${datadir}/${GO_PACKAGE}
 
     install -d ${D}${sysconfdir}/${GO_PACKAGE}
     install -m 0755 ${WORKDIR}/${GO_PACKAGE}.yml ${D}${sysconfdir}/${GO_PACKAGE}/${GO_PACKAGE}.yml
