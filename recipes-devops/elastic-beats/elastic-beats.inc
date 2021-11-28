@@ -16,13 +16,13 @@ CGO_LDFLAGS += "--sysroot=${STAGING_DIR_TARGET} -L${STAGING_LIBDIR}"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
 
-# PV = "7.13.2"
-SRCREV = "${AUTOREV}"
+# PV = "7.15.2"
+SRCREV = "fd322dad6ceafec40c84df4d2a0694ea357d16cc"
 
 FILESEXTRAPATHS:append = "${THISDIR}/elastic-beats:"
 
 SRC_URI = " \
-        git://${GO_IMPORT}.git;protocol=https;branch=7.13 \
+        git://${GO_IMPORT}.git;protocol=https;branch=7.15 \
         file://${GO_PACKAGE}.yml \
         "
 
