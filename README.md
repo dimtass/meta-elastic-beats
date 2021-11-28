@@ -14,7 +14,7 @@ The supported beats currently are:
 * [auditbeat](https://www.elastic.co/beats/auditbeat)
 * [filebeat](https://www.elastic.co/beats/filebeat)
 * [heartbeat](https://www.elastic.co/beats/heartbeat)
-* [journalbeat
+* [journalbeat](https://www.elastic.co/guide/en/beats/journalbeat/current/journalbeat-overview.html)
 * [metricbeat](https://www.elastic.co/beats/metricbeat)
 * [packetbeat](https://www.elastic.co/beats/packetbeat)
 
