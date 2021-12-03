@@ -27,6 +27,8 @@ do_compile() {
     set -x
     cd ${GO_PACKAGE}
     #GOOS=linux GOARCH=arm go build
+    export http_proxy="${http_proxy}"
+    export https_proxy="${https_proxy}"
     go build
     go clean -modcache
     rm -rf src/${GO_IMPORT}/pkg/mod
