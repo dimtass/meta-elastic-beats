@@ -26,10 +26,12 @@ SRC_URI = " \
         file://${GO_PACKAGE}.yml \
         "
 
-RDEPENDS:${PN}-dev += "bash"
+RDEPENDS:${PN} += "bash"
 
 do_compile() {
     cd ${GO_PACKAGE}
+    export http_proxy="${http_proxy}"
+    export https_proxy="${https_proxy}"
     go build
     # This is needed to remove read-only files
     go clean -modcache

@@ -8,13 +8,18 @@ data clients that can send data to various tools of the Elastic Stack, like
 [Kibana](elastic.co/kibana) and 
 [Logstash](https://www.elastic.co/logstash).
 
+> Note: If you're interested on how to use beats in embedded and Yocto or how
+to create your own beats then read these posts in my blog
+[post 1](https://www.stupid-projects.com/using-elastic-stack-elk-on-embedded-part-1/),
+[post 2](https://www.stupid-projects.com/using-elastic-stack-elk-on-embedded-part-2/).
+
 ## Supported beats
 The supported beats currently are:
 
 * [auditbeat](https://www.elastic.co/beats/auditbeat)
 * [filebeat](https://www.elastic.co/beats/filebeat)
 * [heartbeat](https://www.elastic.co/beats/heartbeat)
-* [journalbeat
+* [journalbeat](https://www.elastic.co/guide/en/beats/journalbeat/current/journalbeat-overview.html)
 * [metricbeat](https://www.elastic.co/beats/metricbeat)
 * [packetbeat](https://www.elastic.co/beats/packetbeat)
 
