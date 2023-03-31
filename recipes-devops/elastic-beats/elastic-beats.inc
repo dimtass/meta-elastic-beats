@@ -28,6 +28,8 @@ SRC_URI = " \
 
 RDEPENDS:${PN} += "bash"
 
+do_compile[network] = "1"
+
 do_compile() {
     cd ${GO_PACKAGE}
     export http_proxy="${http_proxy}"
