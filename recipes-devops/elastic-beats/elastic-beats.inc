@@ -8,13 +8,13 @@ GO_PACKAGE ?= ""
 
 GO_IMPORT = "github.com/elastic/beats"
 GO_INSTALL = "${GO_IMPORT}/${GO_PACKAGE}"
-BEAT_FOLDER = "${S}/src/${GO_INSTALL}"
+BEAT_FOLDER = "${BEATS_S}/src/${GO_INSTALL}"
 
 CGO_CFLAGS += "--sysroot=${STAGING_DIR_TARGET} -I${STAGING_INCDIR}"
 CGO_LDFLAGS += "--sysroot=${STAGING_DIR_TARGET} -L${STAGING_LIBDIR}"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=00294979737b05a575493ff7b723f25c"
 
 # PV = "7.13.2"
 SRCREV = "${AUTOREV}"
@@ -28,13 +28,18 @@ SRC_URI = " \
 
 RDEPENDS:${PN} += "bash"
 
+do_configure:append() {
+    # Fix missing src directory in whinlatter
+    ln -snf ${S} ${S}/src
+}
+
 do_compile[network] = "1"
 
 do_compile() {
-    cd ${GO_PACKAGE}
+    cd ${B}/src/${GO_PACKAGE}
     export http_proxy="${http_proxy}"
     export https_proxy="${https_proxy}"
-    go build
+    go build ${GOBUILDFLAGS}
     # This is needed to remove read-only files
     go clean -modcache
     rm -rf src/${GO_IMPORT}/pkg/mod
@@ -48,10 +53,10 @@ do_install() {
     install -m 0755 ${WORKDIR}/${GO_PACKAGE} ${D}${bindir}
 
     install -d ${D}${datadir}/${GO_PACKAGE}/bin
-    install -m 0755 ${BEAT_FOLDER}/${GO_PACKAGE} ${D}${datadir}/${GO_PACKAGE}/bin/
+    install -m 0755 ${B}/src/${GO_PACKAGE}/${GO_PACKAGE} ${D}${datadir}/${GO_PACKAGE}/bin/
 
     install -d ${D}${sysconfdir}/${GO_PACKAGE}
-    install -m 0755 ${WORKDIR}/${GO_PACKAGE}.yml ${D}${sysconfdir}/${GO_PACKAGE}/${GO_PACKAGE}.yml
+    install -m 0755 ${BEATS_S}/../${GO_PACKAGE}.yml ${D}${sysconfdir}/${GO_PACKAGE}/${GO_PACKAGE}.yml
 
     install -d ${D}${localstatedir}/lib/${GO_PACKAGE}
     install -d ${D}${localstatedir}/log/${GO_PACKAGE}
