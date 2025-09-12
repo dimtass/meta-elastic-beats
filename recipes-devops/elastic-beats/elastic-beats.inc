@@ -4,6 +4,8 @@ AUTHOR = "Dimitris Tassopoulos <dimtass@gmail.com>"
 
 inherit go go-mod
 
+S = "${BEATS_S}"
+
 GO_PACKAGE ?= ""
 
 GO_IMPORT = "github.com/elastic/beats"
