@@ -1,0 +1,17 @@
+[Unit]
+Description=packetbeat
+Documentation=https://www.elastic.co/guide/en/beats/packetbeat/index.html
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/packetbeat --path.config=/etc/packetbeat --path.home=/usr/share/packetbeat -e
+Restart=always
+RestartSec=10
+User=root
+Group=root
+
+
+[Install]
+WantedBy=multi-user.target

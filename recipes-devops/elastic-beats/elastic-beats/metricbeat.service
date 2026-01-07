@@ -1,0 +1,17 @@
+[Unit]
+Description=metricbeat
+Documentation=https://www.elastic.co/guide/en/beats/metricbeat/index.html
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/metricbeat --path.config=/etc/metricbeat --path.home=/usr/share/metricbeat -e
+Restart=always
+RestartSec=10
+User=root
+Group=root
+
+
+[Install]
+WantedBy=multi-user.target

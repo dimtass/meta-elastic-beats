@@ -1,0 +1,17 @@
+[Unit]
+Description=journalbeat
+Documentation=https://www.elastic.co/guide/en/beats/journalbeat/index.html
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/journalbeat --path.config=/etc/journalbeat --path.home=/usr/share/journalbeat -e
+Restart=always
+RestartSec=10
+User=root
+Group=root
+
+
+[Install]
+WantedBy=multi-user.target
