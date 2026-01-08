@@ -12,14 +12,16 @@ GO_INSTALL = "${GO_IMPORT}"
 GO_WORKDIR = "${GO_IMPORT}/${GO_PACKAGE}"
 BEAT_FOLDER = "src/${GO_INSTALL}"
 GO_PACKAGE ?= ""
+GO_LINKSHARED = ""
+
 
 FILESEXTRAPATHS:append = "${THISDIR}/elastic-beats:"
 
 inherit go-mod systemd
 
-PV = "8.4.3"
-SRCBRANCH ?= "8.4"
-SRCREV ?= "2b41b676ec0ac5a16a04baeb0ece2403177b9432"
+PV = "8.14.3"
+SRCBRANCH ?= "8.14"
+SRCREV ?= "71819961045386b23edc18455f1b54764292816c"
 
 RDEPENDS:${PN} += "bash"
 
