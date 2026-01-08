@@ -8,6 +8,8 @@ data clients that can send data to various tools of the Elastic Stack, like
 [Kibana](elastic.co/kibana) and 
 [Logstash](https://www.elastic.co/logstash).
 
+## Introduction
+Beats can be installed in custom linux images using Yocto. It is preferred to run beats as systemd services, this implementation does exactly that. After the image is built, beats will be installed as systemd services and can be used to monitor different aspects of the systems. This project is primarily focused on embedded systems but can be used for any custom linux.
 
 ## Supported beats
 The supported beats currently are:
@@ -19,11 +21,21 @@ The supported beats currently are:
 * [packetbeat](https://www.elastic.co/beats/packetbeat)
 
 ## Supported versions
-
 * v8.4.3
 
-## Adding the meta-elastic-beats layer to your build
+## Adding systemd support
+It is very important that the distribution being built supports systemd. To add systemd support, in build/local.conf following lines can be added:
 
+```sh
+CONF_VERSION = "2"
+
+DISTRO_FEATURES:append = " systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_initscripts = ""
+```
+
+## Adding the meta-elastic-beats layer to your build
 To add the layer to your build :
 
 ```sh
