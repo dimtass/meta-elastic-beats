@@ -8,10 +8,8 @@ data clients that can send data to various tools of the Elastic Stack, like
 [Kibana](elastic.co/kibana) and 
 [Logstash](https://www.elastic.co/logstash).
 
-> Note: If you're interested on how to use beats in embedded and Yocto or how
-to create your own beats then read these posts in my blog
-[post 1](https://www.stupid-projects.com/using-elastic-stack-elk-on-embedded-part-1/),
-[post 2](https://www.stupid-projects.com/using-elastic-stack-elk-on-embedded-part-2/).
+## Introduction
+Beats can be installed in custom linux images using Yocto. It is preferred to run beats as systemd services, this implementation does exactly that. After the image is built, beats will be installed as systemd services and can be used to monitor different aspects of the systems. This project is primarily focused on embedded systems but can be used for any custom linux.
 
 ## Supported beats
 The supported beats currently are:
@@ -19,19 +17,25 @@ The supported beats currently are:
 * [auditbeat](https://www.elastic.co/beats/auditbeat)
 * [filebeat](https://www.elastic.co/beats/filebeat)
 * [heartbeat](https://www.elastic.co/beats/heartbeat)
-* [journalbeat](https://www.elastic.co/guide/en/beats/journalbeat/current/journalbeat-overview.html)
 * [metricbeat](https://www.elastic.co/beats/metricbeat)
 * [packetbeat](https://www.elastic.co/beats/packetbeat)
 
 ## Supported versions
-The master repo recipes point always to the latest master `SRCREV = "${AUTOREV}"`,
-but there are tags in the repo for specific and tested versions.
-The supported versions (and repo tags) are:
+* v8.4.3
 
-* v7.9.0
+## Adding systemd support
+It is very important that the distribution being built supports systemd. To add systemd support, in build/local.conf following lines can be added:
+
+```sh
+CONF_VERSION = "2"
+
+DISTRO_FEATURES:append = " systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_initscripts = ""
+```
 
 ## Adding the meta-elastic-beats layer to your build
-
 To add the layer to your build :
 
 ```sh
@@ -48,7 +52,6 @@ To add a beat in your image then add one of the following recipes to your
 elastic-beats-auditbeat
 elastic-beats-filebeat
 elastic-beats-heartbeat
-elastic-beats-journalbeat
 elastic-beats-metricbeat
 elastic-beats-packetbeat
 ```
@@ -62,12 +65,6 @@ IMAGE_INSTALL += "elastic-beats-journalbeat elastic-beats-metricbeat"
 The configuration yaml files are the default ones. You need to override them
 with a custom recipe and use your own for your specific usage. The configuration
 Yaml files are located in `meta-elastic-beats/recipes-devops/elastic-beats/elastic-beats`.
-
-## Known issues
-The golang build changes the files in pkg/mod in to read only. This means that
-bitbake is not able to delete those files if the build fails and you need to
-delete the folder manually. Normally this is handled in `meta-elastic-beats/recipes-devops/elastic-beats/elastic-beats.inc`
-with the `go clean -modcache` comamnd. 
 
 ## Maintainer
 Dimitris Tassopoulos <dimtass@gmail.com>
